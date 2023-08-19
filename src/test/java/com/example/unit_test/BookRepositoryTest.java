@@ -14,8 +14,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 
 @DataJpaTest
 class BookRepositoryTest {
@@ -30,16 +28,19 @@ class BookRepositoryTest {
     @AfterEach
     void tearDown() {
     }
+    @Sql("classpath:script.sql")
     @Test
     public void itShouldSaveNewBook(){
         //Given
-        Book book=new Book(1,"unit testing");
-
+        Book book1=new Book(1,"unit testing");
+        Book book2=new Book(2,"unit testing");
         //When
-        underTest.save(book);
+        underTest.save(book1);
+        underTest.save(book2);
         //Then
-        Optional<Book> book1= underTest.findById(1);
-        assertThat(book1)
+        Optional<Book> book1Db= underTest.findById(1);
+        underTest.findByIdAndName(1,"unit testing");
+        assertThat(book1Db)
                 .isPresent()
                 .hasValueSatisfying(b->{
                     assertThat(b).isInstanceOf(Book.class);

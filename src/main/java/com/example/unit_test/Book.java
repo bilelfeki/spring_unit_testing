@@ -15,8 +15,6 @@ public class Book {
         Id = id;
         this.name = name;
     }
-
-
     public Book() {
     }
 }
