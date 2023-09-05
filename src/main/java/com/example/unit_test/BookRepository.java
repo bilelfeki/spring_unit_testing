@@ -5,12 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book,Integer> {
-    @Query("select b from Book b where b.Id = ?1 and b.name= ?2")
-    Book findByIdAndName(Integer id, String name);
-    @Query("select b from Book b where  b.name= ?1")
-    Book findByName( String name);
+public interface BookRepository extends CrudRepository<MailTask,Integer> {
+    @Query("select b from MailTask b where b.Id = ?1 and b.calledClass= ?2")
+    MailTask findByIdAndName(Integer id, String name);
+    @Query("select b from MailTask b where  b.calledClass= ?1")
+    MailTask findByName(String name);
+    @Query("select  b from MailTask b where b.calledClass<>?1")
+    List<MailTask> findAllMailTaskExcludingQuartz(String Name);
 }

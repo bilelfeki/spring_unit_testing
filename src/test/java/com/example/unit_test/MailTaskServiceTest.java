@@ -9,15 +9,11 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
-class BookServiceTest {
+class MailTaskServiceTest {
     @Mock
     BookRepository bookRepository;
 
@@ -37,13 +33,14 @@ class BookServiceTest {
 
     @Test
     void calculateLibraryBook() {
-        Book book1=new Book(1,"unit testing");
-        Book book2=new Book(2,"unit testing");
-        List<Book> books= new ArrayList<>();
-        books.add(book1);
-        books.add(book2);
+        MailTask mailTask1 =new MailTask(1,"unit testing");
+        MailTask mailTask2 =new MailTask(2,"unit testing");
+        List<MailTask> mailTasks = new ArrayList<>();
+        mailTasks.add(mailTask1);
+        mailTasks.add(mailTask2);
 
-        given(bookRepository.findAll()).willReturn(books);
+        given(bookRepository.findAll()).willReturn(mailTasks);
         assertThat(bookService.calculateLibraryBook()).isGreaterThan(1);
     }
+
 }
